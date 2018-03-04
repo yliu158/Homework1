@@ -1,6 +1,19 @@
 #include "Multi_thread_Query.cpp"
 #include <limits.h>
 
+#ifndef GET_TSC_HPP
+#define GET_TSC_HPP
+
+inline unsigned long long
+get_tsc() {
+    unsigned int a, d;
+    // asm volatile("lfence; rdtsc; lfence" : "=a" (a), "=d" (d));
+    asm volatile("rdtsc" : "=a" (a), "=d" (d));
+    return (unsigned long) a | (((unsigned long) d) << 32);;
+}
+
+#endif
+
 void showResults(int core_num, string filename, string query_filename) {
   vector<vector<double> > *data = readTrainingFile(filename);
   Node* root = buildTree(*data);
@@ -18,7 +31,7 @@ void showResults(int core_num, string filename, string query_filename) {
 }
 
 int main(int argc, char const *argv[]) {
-    if (argc <= 4) {
+    if (argc < 4) {
         cout << "Fail to get arguments." << endl;
         exit(0);
     }
