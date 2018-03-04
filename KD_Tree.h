@@ -1,0 +1,21 @@
+#include <vector>
+#include <numeric>
+#include <math.h>
+#include <vector>
+#include <fcntl.h>
+#include <iostream>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string>
+#include <mutex>
+#include <condition_variable>
+#include <thread>
+#include <vector>
+#include <algorithm>
+#include <assert.h>
+#include <iomanip>
+#include <algorithm>
+#include <iostream>
+#include <stdlib.h>
+using namespace std;

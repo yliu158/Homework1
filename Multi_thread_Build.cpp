@@ -1,15 +1,6 @@
-#include <vector>
-#include <iomanip>
-#include <algorithm>
-#include <iostream>
-#include <stdlib.h>
-#include <assert.h>
-#include <math.h>
 #include "Read.cpp"
-#include <thread>
 #include "Variance.cpp"
-#include <mutex>
-#include <condition_variable>
+#include "KD_Tree.h"
 using namespace std;
 
 class Node {

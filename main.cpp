@@ -1,4 +1,5 @@
 #include "Multi_thread_Query.cpp"
+#include "Write.cpp"
 #include <limits.h>
 
 #ifndef GET_TSC_HPP
@@ -15,10 +16,14 @@ get_tsc() {
 #endif
 
 void showResults(int core_num, string filename, string query_filename) {
-  vector<vector<double> > *data = readTrainingFile(filename);
+  unsigned long long trainingID;
+  vector<vector<double> > *data = readTrainingFile(filename, trainingID);
   Node* root = buildTree(*data);
-  int neighbors = 0;
-  vector<vector<double> > * queries = readQueryFile(query_filename, neighbors);
+  unsigned long long  neighbors = 0;
+  unsigned long long  queries_num = 0;
+  unsigned long long  dimension = 0;
+  unsigned long long  queryID = 0;
+  vector<vector<double> > * queries = readQueryFile(query_filename, neighbors, queries_num, dimension, queryID);
   vector<vector<pair<double, Node*>>> knns_kd;
   multi_thread_query(*data, root, queries, knns_kd, core_num, neighbors);
   for (int i = 0; i < knns_kd.size(); ++i) {
@@ -28,6 +33,8 @@ void showResults(int core_num, string filename, string query_filename) {
     }
     cout << endl;
   }
+
+  writeToFile(knns_kd, neighbors, queries_num, dimension, trainingID, queryID);
 }
 
 int main(int argc, char const *argv[]) {

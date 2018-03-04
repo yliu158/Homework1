@@ -1,9 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <numeric>
-#include <math.h>
-using namespace std;
-
+#include "KD_Tree.h"
 double variance (const vector<double>& v) {
   double sum = accumulate(v.begin(), v.end(), 0.0);
   double mean = sum / v.size();
